@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação da Loja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .options label {
+            margin: 5px 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .buttons button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+        .emoji-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .emoji-buttons button {
+            font-size: 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        #chartContainer {
+            margin-top: 30px;
+        }
+        canvas {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Avaliação</h1>
+        <form id="feedbackForm">
+            <!-- Pergunta 1 -->
+            <div class="question">
+                <label>Por onde nos conheceu?</label>
+                <div class="options">
+                    <label><input type="radio" name="origem" value="Google" required> Google</label>
+                    <label><input type="radio" name="origem" value="Instagram"> Instagram</label>
+                    <label><input type="radio" name="origem" value="Facebook"> Facebook</label>
+                    <label><input type="radio" name="origem" value="Indicação"> Indicação</label>
+                    <label><input type="radio" name="origem" value="Passei na porta"> Passei na porta da loja</label>
+                    <label><input type="radio" name="origem" value="WhatsApp"> WhatsApp</label>
+                </div>
+            </div>
+            <!-- Pergunta 2 -->
+            <div class="question">
+                <label>Por quem foi atendido(a)?</label>
+                <div class="options">
+                    <label><input type="radio" name="consultora" value="Micaelly" required> Micaelly</label>
+                    <label><input type="radio" name="consultora" value="Jéssica"> Jéssica</label>
+                    <label><input type="radio" name="consultora" value="Maju"> Maju</label>
+                    <label><input type="radio" name="consultora" value="Júlia"> Júlia</label>
+                    <label><input type="radio" name="consultora" value="Esqueci"> Esqueci o nome</label>
+                </div>
+            </div>
+            <!-- Pergunta 3 -->
+            <div class="question">
+                <label>Como foi atendido(a)?</label>
+                <div class="emoji-buttons">
+                    <button type="button" onclick="saveFeedback('😀')">😀</button>
+                    <button type="button" onclick="saveFeedback('🙂')">🙂</button>
+                    <button type="button" onclick="saveFeedback('😐')">😐</button>
+                    <button type="button" onclick="saveFeedback('😞')">😞</button>
+                </div>
+            </div>
+            <!-- Pergunta 4 -->
+            <div class="question">
+                <label for="sugestoes">Críticas ou sugestões</label>
+                <textarea id="sugestoes" name="sugestoes" placeholder="Escreva aqui..."></textarea>
+            </div>
+            <div class="buttons">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div id="chartContainer">
+        <h2>Relatórios</h2>
+        <canvas id="relatorioChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let data = {
+            origem: {},
+            consultora: {}
+        };
+        function saveFeedback(emoji) {
+            alert("Feedback recebido com " + emoji);
+        }
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const origem = formData.get("origem");
+            const consultora = formData.get("consultora");
+            
+            data.origem[origem] = (data.origem[origem] || 0) + 1;
+            data.consultora[consultora] = (data.consultora[consultora] || 0) + 1;
+
+            alert("Obrigado pelo seu feedback!");
+            updateChart();
+        });
+        function updateChart() {
+            const ctx = document.getElementById("relatorioChart").getContext("2d");
+            const labels = Object.keys(data.origem);
+            const values = Object.values(data.origem);
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Respostas",
+                        data: values,
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
