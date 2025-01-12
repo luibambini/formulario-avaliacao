@@ -3,119 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação da Loja</title>
+    <title>Avaliação</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             background-color: #FFFAF0;
+            height: 100vh;
         }
         .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
             background: #fff;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-        }
-        .header {
-            position: absolute;
-            top: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            overflow: hidden;
-            width: 100px;
-            height: 100px;
-        }
-        .header img {
-            width: 100%;
-            height: 100%;
+            width: 95%;
+            max-width: 1200px;
         }
         .video {
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            max-width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 400px;
         }
         .video video {
             width: 100%;
+            max-height: 300px;
             border-radius: 15px;
         }
-        h1 {
-            color: #FF6F61;
+        .form-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 20px;
         }
-        .question {
-            margin-bottom: 20px;
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
         }
-        .question label {
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-group label {
             font-weight: bold;
-            font-size: 16px;
-            display: block;
             margin-bottom: 10px;
             color: #333;
         }
-        .options {
+        .option-grid {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .option-item, .vendedora {
-            margin: 10px;
+        .option-item {
             text-align: center;
+            cursor: pointer;
         }
-        .option-item img, .vendedora img {
+        .option-item img {
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            cursor: pointer;
             border: 3px solid transparent;
             transition: border 0.3s ease;
         }
-        .option-item img:hover, .vendedora img:hover {
+        .option-item img:hover {
             border: 3px solid #FF6F61;
         }
-        .option-item span, .vendedora span {
+        .option-item span {
             display: block;
-            font-size: 14px;
             margin-top: 5px;
-            color: #333;
-        }
-        textarea {
-            resize: none;
-            width: 100%;
-            height: 60px;
-            max-length: 200;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            font-size: 14px;
         }
         .rating {
             display: flex;
             justify-content: center;
-            gap: 5px;
+            gap: 10px;
         }
         .rating span {
             font-size: 24px;
             cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
         }
         .rating span:hover {
-            color: #FF6F61;
+            background-color: #FF6F61;
+            color: white;
+        }
+        textarea {
+            width: 100%;
+            resize: none;
+            height: 60px;
+            max-length: 200;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
         }
         button {
             background-color: #FF6F61;
             color: white;
             border: none;
             padding: 10px 20px;
-            margin-top: 20px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -127,86 +129,86 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <img src="mascote.jpg" alt="Mascote">
-        </div>
         <div class="video">
             <video autoplay loop muted>
                 <source src="video_mascote.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos.
             </video>
         </div>
-        <h1>Avaliação</h1>
-        <form id="feedbackForm">
-            <div class="question">
-                <label>Por onde nos conheceu?</label>
-                <div class="options">
-                    <div class="option-item" onclick="setOrigem('Google')">
-                        <img src="google.jpg" alt="Google">
-                        <span>Google</span>
+        <div class="form-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Por onde nos conheceu?</label>
+                    <div class="option-grid">
+                        <div class="option-item" onclick="setOrigem('Google')">
+                            <img src="google.jpg" alt="Google">
+                            <span>Google</span>
+                        </div>
+                        <div class="option-item" onclick="setOrigem('Instagram')">
+                            <img src="instagram.jpg" alt="Instagram">
+                            <span>Instagram</span>
+                        </div>
+                        <div class="option-item" onclick="setOrigem('Facebook')">
+                            <img src="facebook.jpg" alt="Facebook">
+                            <span>Facebook</span>
+                        </div>
+                        <div class="option-item" onclick="setOrigem('Indicação')">
+                            <img src="indicacao.jpg" alt="Indicação">
+                            <span>Indicação</span>
+                        </div>
+                        <div class="option-item" onclick="setOrigem('WhatsApp')">
+                            <img src="whatsapp.jpg" alt="WhatsApp">
+                            <span>WhatsApp</span>
+                        </div>
+                        <div class="option-item" onclick="setOrigem('Passei na porta')">
+                            <img src="passei.jpg" alt="Passei na porta">
+                            <span>Passei na porta</span>
+                        </div>
                     </div>
-                    <div class="option-item" onclick="setOrigem('Instagram')">
-                        <img src="instagram.jpg" alt="Instagram">
-                        <span>Instagram</span>
-                    </div>
-                    <div class="option-item" onclick="setOrigem('Facebook')">
-                        <img src="facebook.jpg" alt="Facebook">
-                        <span>Facebook</span>
-                    </div>
-                    <div class="option-item" onclick="setOrigem('Indicação')">
-                        <img src="indicacao.jpg" alt="Indicação">
-                        <span>Indicação</span>
-                    </div>
-                    <div class="option-item" onclick="setOrigem('Passei na porta')">
-                        <img src="passei.jpg" alt="Passei na porta">
-                        <span>Passei na porta</span>
-                    </div>
-                    <div class="option-item" onclick="setOrigem('WhatsApp')">
-                        <img src="whatsapp.jpg" alt="WhatsApp">
-                        <span>WhatsApp</span>
-                    </div>
+                    <input type="hidden" name="origem" id="origem" required>
                 </div>
-                <input type="hidden" name="origem" id="origem" required>
-            </div>
-            <div class="question">
-                <label>Por quem foi atendido(a)?</label>
-                <div class="options">
-                    <div class="vendedora">
-                        <img src="micaelly.jpg" alt="Micaelly" onclick="setVendedora('Micaelly')">
-                        <span>Micaelly</span>
+                <div class="form-group">
+                    <label>Qual consultora te atendeu?</label>
+                    <div class="option-grid">
+                        <div class="option-item" onclick="setVendedora('Jéssica')">
+                            <img src="jessica.jpg" alt="Jéssica">
+                            <span>Jéssica</span>
+                        </div>
+                        <div class="option-item" onclick="setVendedora('Maju')">
+                            <img src="maju.jpg" alt="Maju">
+                            <span>Maju</span>
+                        </div>
+                        <div class="option-item" onclick="setVendedora('Micaelly')">
+                            <img src="micaelly.jpg" alt="Micaelly">
+                            <span>Micaelly</span>
+                        </div>
+                        <div class="option-item" onclick="setVendedora('Júlia')">
+                            <img src="julia.jpg" alt="Júlia">
+                            <span>Júlia</span>
+                        </div>
                     </div>
-                    <div class="vendedora">
-                        <img src="jessica.jpg" alt="Jéssica" onclick="setVendedora('Jéssica')">
-                        <span>Jéssica</span>
-                    </div>
-                    <div class="vendedora">
-                        <img src="maju.jpg" alt="Maju" onclick="setVendedora('Maju')">
-                        <span>Maju</span>
-                    </div>
-                    <div class="vendedora">
-                        <img src="julia.jpg" alt="Júlia" onclick="setVendedora('Júlia')">
-                        <span>Júlia</span>
-                    </div>
+                    <input type="hidden" name="consultora" id="consultora" required>
                 </div>
-                <input type="hidden" name="consultora" id="consultora" required>
             </div>
-            <div class="question">
-                <label>Qualidade do Atendimento</label>
-                <div class="rating">
-                    <span onclick="setRating(1)">⭐</span>
-                    <span onclick="setRating(2)">⭐</span>
-                    <span onclick="setRating(3)">⭐</span>
-                    <span onclick="setRating(4)">⭐</span>
-                    <span onclick="setRating(5)">⭐</span>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nota do Atendimento</label>
+                    <div class="rating">
+                        <span onclick="setRating(1)">1</span>
+                        <span onclick="setRating(2)">2</span>
+                        <span onclick="setRating(3)">3</span>
+                        <span onclick="setRating(4)">4</span>
+                        <span onclick="setRating(5)">5</span>
+                    </div>
+                    <input type="hidden" name="rating" id="rating" required>
                 </div>
-                <input type="hidden" name="rating" id="rating" required>
             </div>
-            <div class="question">
-                <label>Críticas ou sugestões (máx. 200 caracteres)</label>
+            <div class="form-group">
+                <label>Críticas ou sugestões</label>
                 <textarea name="sugestoes" maxlength="200"></textarea>
             </div>
             <button type="submit">Enviar</button>
-        </form>
+        </div>
     </div>
     <script>
         function setOrigem(origem) {
@@ -219,7 +221,7 @@
         }
         function setRating(rating) {
             document.getElementById('rating').value = rating;
-            alert(`Avaliação selecionada: ${rating} estrela(s)`);
+            alert(`Avaliação selecionada: ${rating}`);
         }
     </script>
 </body>
