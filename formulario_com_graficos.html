@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -60,31 +59,12 @@
         .buttons button:hover {
             background-color: #0056b3;
         }
-        .emoji-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
-        }
-        .emoji-buttons button {
-            font-size: 24px;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-        #chartContainer {
-            margin-top: 30px;
-        }
-        canvas {
-            max-width: 400px;
-            margin: 0 auto;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Avaliação</h1>
         <form id="feedbackForm">
-            <!-- Pergunta 1 -->
             <div class="question">
                 <label>Por onde nos conheceu?</label>
                 <div class="options">
@@ -96,7 +76,6 @@
                     <label><input type="radio" name="origem" value="WhatsApp"> WhatsApp</label>
                 </div>
             </div>
-            <!-- Pergunta 2 -->
             <div class="question">
                 <label>Por quem foi atendido(a)?</label>
                 <div class="options">
@@ -107,17 +86,6 @@
                     <label><input type="radio" name="consultora" value="Esqueci"> Esqueci o nome</label>
                 </div>
             </div>
-            <!-- Pergunta 3 -->
-            <div class="question">
-                <label>Como foi atendido(a)?</label>
-                <div class="emoji-buttons">
-                    <button type="button" onclick="saveFeedback('😀')">😀</button>
-                    <button type="button" onclick="saveFeedback('🙂')">🙂</button>
-                    <button type="button" onclick="saveFeedback('😐')">😐</button>
-                    <button type="button" onclick="saveFeedback('😞')">😞</button>
-                </div>
-            </div>
-            <!-- Pergunta 4 -->
             <div class="question">
                 <label for="sugestoes">Críticas ou sugestões</label>
                 <textarea id="sugestoes" name="sugestoes" placeholder="Escreva aqui..."></textarea>
@@ -127,56 +95,48 @@
             </div>
         </form>
     </div>
-    <div id="chartContainer">
-        <h2>Relatórios</h2>
-        <canvas id="relatorioChart"></canvas>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        let data = {
-            origem: {},
-            consultora: {}
+    <script type="module">
+        // Importando as funções necessárias do SDK Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+        // Configuração do Firebase (copiada do painel do Firebase)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgYttd8A0OTsgu_lJ4iNFhiyaioiulHAs",
+            authDomain: "formulario-avaliacao.firebaseapp.com",
+            databaseURL: "https://formulario-avaliacao-default-rtdb.firebaseio.com",
+            projectId: "formulario-avaliacao",
+            storageBucket: "formulario-avaliacao.firebasestorage.app",
+            messagingSenderId: "757587433246",
+            appId: "1:757587433246:web:f69fc8f05436c626f49b0f",
+            measurementId: "G-ZKS6J4QYZH"
         };
-        function saveFeedback(emoji) {
-            alert("Feedback recebido com " + emoji);
-        }
-        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+
+        // Inicializando o Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Manipular envio do formulário
+        document.getElementById("feedbackForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
-            const origem = formData.get("origem");
-            const consultora = formData.get("consultora");
-            
-            data.origem[origem] = (data.origem[origem] || 0) + 1;
-            data.consultora[consultora] = (data.consultora[consultora] || 0) + 1;
 
-            alert("Obrigado pelo seu feedback!");
-            updateChart();
+            // Criando objeto com os dados
+            const data = {
+                origem: formData.get("origem"),
+                consultora: formData.get("consultora"),
+                sugestoes: formData.get("sugestoes") || "Nenhuma sugestão"
+            };
+
+            try {
+                // Salvando dados no Realtime Database
+                await push(ref(database, "respostas"), data);
+                alert("Obrigado pelo feedback!");
+                event.target.reset();
+            } catch (error) {
+                alert("Erro ao salvar os dados: " + error.message);
+            }
         });
-        function updateChart() {
-            const ctx = document.getElementById("relatorioChart").getContext("2d");
-            const labels = Object.keys(data.origem);
-            const values = Object.values(data.origem);
-            new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: "Respostas",
-                        data: values,
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
     </script>
 </body>
 </html>
