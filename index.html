@@ -6,137 +6,195 @@
     <title>Avaliação da Loja</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #f9f9f9;
-            height: 100vh;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
+            background-color: #FFFAF0;
         }
         .container {
             background: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .header {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            overflow: hidden;
+            width: 100px;
+            height: 100px;
+        }
+        .header img {
+            width: 100%;
+            height: 100%;
+        }
+        h1 {
+            color: #FF6F61;
+        }
+        .video {
+            position: absolute;
+            top: 10px;
+            right: -110px;
+            width: 150px;
+            border-radius: 15px;
+            overflow: hidden;
         }
         .question {
             margin-bottom: 20px;
         }
         .question label {
             font-weight: bold;
+            font-size: 16px;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: #333;
         }
         .options {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-        .options label {
-            margin: 5px 0;
+        .vendedora {
+            margin: 10px;
+            text-align: center;
         }
-        .buttons {
+        .vendedora img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border 0.3s ease;
+        }
+        .vendedora img:hover {
+            border: 3px solid #FF6F61;
+        }
+        .vendedora span {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #333;
+        }
+        textarea {
+            resize: none;
+            width: 100%;
+            height: 60px;
+            max-length: 200;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .rating {
             display: flex;
             justify-content: center;
+            gap: 5px;
         }
-        .buttons button {
-            background-color: #007BFF;
+        .rating span {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .rating span:hover {
+            color: #FF6F61;
+        }
+        button {
+            background-color: #FF6F61;
             color: white;
             border: none;
             padding: 10px 20px;
-            margin: 5px;
+            margin-top: 20px;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .buttons button:hover {
-            background-color: #0056b3;
+        button:hover {
+            background-color: #FF3B2F;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <img src="mascote.jpg" alt="Mascote">
+        </div>
+        <div class="video">
+            <video autoplay loop muted>
+                <source src="video_mascote.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
+        </div>
         <h1>Avaliação</h1>
         <form id="feedbackForm">
             <div class="question">
                 <label>Por onde nos conheceu?</label>
-                <div class="options">
-                    <label><input type="radio" name="origem" value="Google" required> Google</label>
-                    <label><input type="radio" name="origem" value="Instagram"> Instagram</label>
-                    <label><input type="radio" name="origem" value="Facebook"> Facebook</label>
-                    <label><input type="radio" name="origem" value="Indicação"> Indicação</label>
-                    <label><input type="radio" name="origem" value="Passei na porta"> Passei na porta da loja</label>
-                    <label><input type="radio" name="origem" value="WhatsApp"> WhatsApp</label>
-                </div>
+                <select name="origem" required>
+                    <option value="Google">Google</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Indicação">Indicação</option>
+                    <option value="Passei na porta">Passei na porta</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                </select>
             </div>
             <div class="question">
                 <label>Por quem foi atendido(a)?</label>
                 <div class="options">
-                    <label><input type="radio" name="consultora" value="Micaelly" required> Micaelly</label>
-                    <label><input type="radio" name="consultora" value="Jéssica"> Jéssica</label>
-                    <label><input type="radio" name="consultora" value="Maju"> Maju</label>
-                    <label><input type="radio" name="consultora" value="Júlia"> Júlia</label>
-                    <label><input type="radio" name="consultora" value="Esqueci"> Esqueci o nome</label>
+                    <div class="vendedora">
+                        <img src="micaelly.jpg" alt="Micaelly" onclick="setVendedora('Micaelly')">
+                        <span>Micaelly</span>
+                    </div>
+                    <div class="vendedora">
+                        <img src="jessica.jpg" alt="Jéssica" onclick="setVendedora('Jéssica')">
+                        <span>Jéssica</span>
+                    </div>
+                    <div class="vendedora">
+                        <img src="maju.jpg" alt="Maju" onclick="setVendedora('Maju')">
+                        <span>Maju</span>
+                    </div>
+                    <div class="vendedora">
+                        <img src="julia.jpg" alt="Júlia" onclick="setVendedora('Júlia')">
+                        <span>Júlia</span>
+                    </div>
                 </div>
+                <input type="hidden" name="consultora" id="consultora" required>
             </div>
             <div class="question">
-                <label for="sugestoes">Críticas ou sugestões</label>
-                <textarea id="sugestoes" name="sugestoes" placeholder="Escreva aqui..."></textarea>
+                <label>Qualidade do Atendimento</label>
+                <div class="rating">
+                    <span onclick="setRating(1)">⭐</span>
+                    <span onclick="setRating(2)">⭐</span>
+                    <span onclick="setRating(3)">⭐</span>
+                    <span onclick="setRating(4)">⭐</span>
+                    <span onclick="setRating(5)">⭐</span>
+                </div>
+                <input type="hidden" name="rating" id="rating" required>
             </div>
-            <div class="buttons">
-                <button type="submit">Enviar</button>
+            <div class="question">
+                <label>Críticas ou sugestões (máx. 200 caracteres)</label>
+                <textarea name="sugestoes" maxlength="200"></textarea>
             </div>
+            <button type="submit">Enviar</button>
         </form>
     </div>
-    <script type="module">
-        // Importando as funções necessárias do SDK Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-
-        // Configuração do Firebase (copiada do painel do Firebase)
-        const firebaseConfig = {
-            apiKey: "AIzaSyBgYttd8A0OTsgu_lJ4iNFhiyaioiulHAs",
-            authDomain: "formulario-avaliacao.firebaseapp.com",
-            databaseURL: "https://formulario-avaliacao-default-rtdb.firebaseio.com",
-            projectId: "formulario-avaliacao",
-            storageBucket: "formulario-avaliacao.firebasestorage.app",
-            messagingSenderId: "757587433246",
-            appId: "1:757587433246:web:f69fc8f05436c626f49b0f",
-            measurementId: "G-ZKS6J4QYZH"
-        };
-
-        // Inicializando o Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // Manipular envio do formulário
-        document.getElementById("feedbackForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-
-            // Criando objeto com os dados
-            const data = {
-                origem: formData.get("origem"),
-                consultora: formData.get("consultora"),
-                sugestoes: formData.get("sugestoes") || "Nenhuma sugestão"
-            };
-
-            try {
-                // Salvando dados no Realtime Database
-                await push(ref(database, "respostas"), data);
-                alert("Obrigado pelo feedback!");
-                event.target.reset();
-            } catch (error) {
-                alert("Erro ao salvar os dados: " + error.message);
-            }
-        });
+    <script>
+        function setVendedora(nome) {
+            document.getElementById('consultora').value = nome;
+            alert(`Vendedora selecionada: ${nome}`);
+        }
+        function setRating(rating) {
+            document.getElementById('rating').value = rating;
+            alert(`Avaliação selecionada: ${rating} estrela(s)`);
+        }
     </script>
 </body>
 </html>
