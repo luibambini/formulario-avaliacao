@@ -39,16 +39,18 @@
             width: 100%;
             height: 100%;
         }
-        h1 {
-            color: #FF6F61;
-        }
         .video {
-            position: absolute;
-            top: 10px;
-            right: -110px;
-            width: 150px;
+            margin: 20px auto;
             border-radius: 15px;
             overflow: hidden;
+            max-width: 100%;
+        }
+        .video video {
+            width: 100%;
+            border-radius: 15px;
+        }
+        h1 {
+            color: #FF6F61;
         }
         .question {
             margin-bottom: 20px;
@@ -64,12 +66,13 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 10px;
         }
-        .vendedora {
+        .option-item, .vendedora {
             margin: 10px;
             text-align: center;
         }
-        .vendedora img {
+        .option-item img, .vendedora img {
             width: 70px;
             height: 70px;
             border-radius: 50%;
@@ -77,10 +80,10 @@
             border: 3px solid transparent;
             transition: border 0.3s ease;
         }
-        .vendedora img:hover {
+        .option-item img:hover, .vendedora img:hover {
             border: 3px solid #FF6F61;
         }
-        .vendedora span {
+        .option-item span, .vendedora span {
             display: block;
             font-size: 14px;
             margin-top: 5px;
@@ -137,14 +140,33 @@
         <form id="feedbackForm">
             <div class="question">
                 <label>Por onde nos conheceu?</label>
-                <select name="origem" required>
-                    <option value="Google">Google</option>
-                    <option value="Instagram">Instagram</option>
-                    <option value="Facebook">Facebook</option>
-                    <option value="Indicação">Indicação</option>
-                    <option value="Passei na porta">Passei na porta</option>
-                    <option value="WhatsApp">WhatsApp</option>
-                </select>
+                <div class="options">
+                    <div class="option-item" onclick="setOrigem('Google')">
+                        <img src="google.jpg" alt="Google">
+                        <span>Google</span>
+                    </div>
+                    <div class="option-item" onclick="setOrigem('Instagram')">
+                        <img src="instagram.jpg" alt="Instagram">
+                        <span>Instagram</span>
+                    </div>
+                    <div class="option-item" onclick="setOrigem('Facebook')">
+                        <img src="facebook.jpg" alt="Facebook">
+                        <span>Facebook</span>
+                    </div>
+                    <div class="option-item" onclick="setOrigem('Indicação')">
+                        <img src="indicacao.jpg" alt="Indicação">
+                        <span>Indicação</span>
+                    </div>
+                    <div class="option-item" onclick="setOrigem('Passei na porta')">
+                        <img src="passei.jpg" alt="Passei na porta">
+                        <span>Passei na porta</span>
+                    </div>
+                    <div class="option-item" onclick="setOrigem('WhatsApp')">
+                        <img src="whatsapp.jpg" alt="WhatsApp">
+                        <span>WhatsApp</span>
+                    </div>
+                </div>
+                <input type="hidden" name="origem" id="origem" required>
             </div>
             <div class="question">
                 <label>Por quem foi atendido(a)?</label>
@@ -187,6 +209,10 @@
         </form>
     </div>
     <script>
+        function setOrigem(origem) {
+            document.getElementById('origem').value = origem;
+            alert(`Origem selecionada: ${origem}`);
+        }
         function setVendedora(nome) {
             document.getElementById('consultora').value = nome;
             alert(`Vendedora selecionada: ${nome}`);
