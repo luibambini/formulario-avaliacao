@@ -47,12 +47,13 @@
             gap: 20px;
         }
 
-        h1, h1 {
+        h1, h2 {
             font-family: 'Georgia', serif;
             font-size: 2rem;
-            color: #b71c1c; /* Cor da marca */
+            color: #ff9800; /* Cor laranja */
             margin-bottom: 10px;
             text-align: center;
+            text-transform: uppercase; /* Caixa alta */
         }
 
         .section {
@@ -61,7 +62,7 @@
 
         .options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 15px;
             justify-items: center;
         }
@@ -73,8 +74,8 @@
         }
 
         .option-item img {
-            width: 70px;
-            height: 70px;
+            width: 80px; /* Aumentado o tamanho das imagens */
+            height: 80px;
             border-radius: 50%;
             border: 3px solid transparent;
         }
@@ -133,13 +134,13 @@
                 gap: 10px;
             }
 
-            h1, h1 {
+            h1, h2 {
                 font-size: 1.5rem;
             }
 
             .option-item img {
-                width: 50px;
-                height: 50px;
+                width: 70px;
+                height: 70px;
             }
 
             .rating img {
@@ -161,11 +162,11 @@
 
         <!-- Formulário -->
         <div class="form-section">
-            <h1>AJUDE A MELHORARMOS CADA DIA MAIS</h1>
+            <h1>Avaliação</h1>
 
             <!-- Por onde nos conheceu -->
             <div class="section">
-                <h1>POR ONDE NOS CONHECEU?</h1>
+                <h2>Por onde nos conheceu?</h2>
                 <div class="options" id="origem-group">
                     <div class="option-item" onclick="selectOption(this, 'origem', 'Google')">
                         <img src="google.jpg" alt="Google">
@@ -196,7 +197,7 @@
 
             <!-- Qual consultora te atendeu -->
             <div class="section">
-                <h1>QUAL O NOME DA CONSULTORA QUE TE ATENDEU?</h1>
+                <h2>Qual consultora te atendeu?</h2>
                 <div class="options" id="consultora-group">
                     <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
                         <img src="jessica.jpg" alt="Jéssica">
@@ -219,7 +220,7 @@
 
             <!-- Nota do Atendimento -->
             <div class="section">
-                <h1>AVALIE O ATENDIMENTO DA CONSULTORA</h1>
+                <h2>Nota do Atendimento</h2>
                 <div class="rating" id="rating-group">
                     <img src="um.jpg" alt="1" onclick="selectOption(this, 'rating', '1')">
                     <img src="dois.jpg" alt="2" onclick="selectOption(this, 'rating', '2')">
@@ -231,12 +232,12 @@
 
             <!-- Críticas ou sugestões -->
             <div class="section">
-                <h1>ALGO A NOS DIZER?</h1>
+                <h2>Críticas ou sugestões</h2>
                 <textarea name="sugestoes" maxlength="200"></textarea>
             </div>
 
             <!-- Botão Enviar -->
-            <button onclick="submitForm()">ENVIAR</button>
+            <button onclick="submitForm()">Enviar</button>
         </div>
     </div>
 
