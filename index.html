@@ -137,27 +137,27 @@
         <div class="form-section">
             <div class="form-group">
                 <label>Por onde nos conheceu?</label>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Google')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Google', 'origem-group')">
                     <img src="google.jpg" alt="Google">
                     <span>Google</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Instagram')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Instagram', 'origem-group')">
                     <img src="instagram.jpg" alt="Instagram">
                     <span>Instagram</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Facebook')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Facebook', 'origem-group')">
                     <img src="facebook.jpg" alt="Facebook">
                     <span>Facebook</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Indicação')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Indicação', 'origem-group')">
                     <img src="indicacao.jpg" alt="Indicação">
                     <span>Indicação</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'WhatsApp')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'WhatsApp', 'origem-group')">
                     <img src="whatsapp.jpg" alt="WhatsApp">
                     <span>WhatsApp</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Passei na porta')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Passei na porta', 'origem-group')">
                     <img src="passei.jpg" alt="Passei na porta">
                     <span>Passei na porta</span>
                 </div>
@@ -165,19 +165,19 @@
             </div>
             <div class="form-group">
                 <label>Qual consultora te atendeu?</label>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica', 'consultora-group')">
                     <img src="jessica.jpg" alt="Jéssica">
                     <span>Jéssica</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Maju')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Maju', 'consultora-group')">
                     <img src="maju.jpg" alt="Maju">
                     <span>Maju</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Micaelly')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Micaelly', 'consultora-group')">
                     <img src="micaelly.jpg" alt="Micaelly">
                     <span>Micaelly</span>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Júlia')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Júlia', 'consultora-group')">
                     <img src="julia.jpg" alt="Júlia">
                     <span>Júlia</span>
                 </div>
@@ -186,11 +186,11 @@
             <div class="form-group">
                 <label>Nota do Atendimento</label>
                 <div class="rating">
-                    <div class="star" onclick="selectOption(this, 'rating', 1)">1</div>
-                    <div class="star" onclick="selectOption(this, 'rating', 2)">2</div>
-                    <div class="star" onclick="selectOption(this, 'rating', 3)">3</div>
-                    <div class="star" onclick="selectOption(this, 'rating', 4)">4</div>
-                    <div class="star" onclick="selectOption(this, 'rating', 5)">5</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 1, 'rating-group')">1</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 2, 'rating-group')">2</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 3, 'rating-group')">3</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 4, 'rating-group')">4</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 5, 'rating-group')">5</div>
                 </div>
                 <input type="hidden" name="rating" id="rating">
             </div>
@@ -202,12 +202,12 @@
         </div>
     </div>
     <script>
-        function selectOption(element, fieldId, value) {
-            // Remove seleção anterior
-            const options = document.querySelectorAll(`.option-item, .star`);
+        function selectOption(element, fieldId, value, groupClass) {
+            // Limpar seleção anterior do grupo
+            const options = document.querySelectorAll(`.${groupClass}`);
             options.forEach(opt => opt.classList.remove('selected'));
 
-            // Adicionar seleção
+            // Adicionar seleção ao elemento clicado
             element.classList.add('selected');
             document.getElementById(fieldId).value = value;
         }
