@@ -18,18 +18,20 @@
 
         .container {
             width: 90%;
-            max-width: 900px;
+            max-width: 1024px; /* Dimensões do iPad horizontal */
             background: #ffffff;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
         }
 
         .video {
             width: 30%;
+            min-width: 250px;
         }
 
         .video video {
@@ -38,12 +40,12 @@
         }
 
         .form-section {
-            width: 70%;
+            width: 65%;
         }
 
         h1, h2 {
             font-family: 'Georgia', serif;
-            font-size: 28px;
+            font-size: 2vw; /* Fonte adaptativa */
             margin-bottom: 20px;
             color: #b71c1c; /* Cor da marca */
         }
@@ -65,8 +67,8 @@
         }
 
         .option-item img {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             border: 3px solid transparent;
         }
@@ -77,7 +79,7 @@
 
         .option-item p {
             margin: 10px 0 0;
-            font-size: 16px;
+            font-size: 1vw; /* Texto adaptativo */
             color: #424242;
         }
 
@@ -114,6 +116,32 @@
 
         button:hover {
             background-color: #c62828;
+        }
+
+        /* Ajuste para telas menores (responsivo) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .video, .form-section {
+                width: 100%;
+            }
+
+            h1, h2 {
+                font-size: 5vw;
+            }
+
+            .option-item img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .rating img {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -189,11 +217,11 @@
             <div class="section">
                 <h2>Nota do Atendimento</h2>
                 <div class="rating" id="rating-group">
-                 <img src="um.jpg" alt="1" onclick="selectOption(this, 'rating', '1')">
-                <img src="dois.jpg" alt="2" onclick="selectOption(this, 'rating', '2')">
-                <img src="tres.jpg" alt="3" onclick="selectOption(this, 'rating', '3')">
-                <img src="quatro.jpg" alt="4" onclick="selectOption(this, 'rating', '4')">
-                <img src="cinco.jpg" alt="5" onclick="selectOption(this, 'rating', '5')">
+                    <img src="um.jpg" alt="1" onclick="selectOption(this, 'rating', '1')">
+                    <img src="dois.jpg" alt="2" onclick="selectOption(this, 'rating', '2')">
+                    <img src="tres.jpg" alt="3" onclick="selectOption(this, 'rating', '3')">
+                    <img src="quatro.jpg" alt="4" onclick="selectOption(this, 'rating', '4')">
+                    <img src="cinco.jpg" alt="5" onclick="selectOption(this, 'rating', '5')">
                 </div>
             </div>
 
@@ -217,11 +245,10 @@
         }
 
         function submitForm() {
-            // Simula envio e redirecionamento
             setTimeout(() => {
                 alert('Avaliação enviada com sucesso! Retornando...');
                 window.location.reload();
-            }, 1000); // Mensagem desaparece após 1 segundo
+            }, 1000);
         }
     </script>
 </body>
