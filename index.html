@@ -54,10 +54,16 @@
             font-weight: bold;
             margin-bottom: 10px;
             text-align: center;
+            font-size: 20px;
         }
         .option-item {
             text-align: center;
             cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .option-item.selected {
+            opacity: 0.5;
         }
         .option-item img {
             width: 70px;
@@ -65,9 +71,6 @@
             border-radius: 50%;
             border: 3px solid transparent;
             transition: border 0.3s ease;
-        }
-        .option-item img:hover {
-            border: 3px solid #FF6F61;
         }
         .option-item span {
             display: block;
@@ -90,17 +93,23 @@
             justify-content: center;
             gap: 10px;
         }
-        .rating span {
+        .rating .star {
             font-size: 24px;
             cursor: pointer;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
-        .rating span:hover {
-            background-color: #FF6F61;
+            background-color: gold;
             color: white;
+            padding: 15px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .rating .star:hover {
+            transform: scale(1.2);
+            background-color: #f39c12;
         }
         button {
             grid-column: 1 / -1;
@@ -128,82 +137,83 @@
         <div class="form-section">
             <div class="form-group">
                 <label>Por onde nos conheceu?</label>
-                <div class="option-item" onclick="setOrigem('Google')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Google')">
                     <img src="google.jpg" alt="Google">
                     <span>Google</span>
                 </div>
-                <div class="option-item" onclick="setOrigem('Instagram')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Instagram')">
                     <img src="instagram.jpg" alt="Instagram">
                     <span>Instagram</span>
                 </div>
-                <div class="option-item" onclick="setOrigem('Facebook')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Facebook')">
                     <img src="facebook.jpg" alt="Facebook">
                     <span>Facebook</span>
                 </div>
-                <div class="option-item" onclick="setOrigem('Indicação')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Indicação')">
                     <img src="indicacao.jpg" alt="Indicação">
                     <span>Indicação</span>
                 </div>
-                <div class="option-item" onclick="setOrigem('WhatsApp')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'WhatsApp')">
                     <img src="whatsapp.jpg" alt="WhatsApp">
                     <span>WhatsApp</span>
                 </div>
-                <div class="option-item" onclick="setOrigem('Passei na porta')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Passei na porta')">
                     <img src="passei.jpg" alt="Passei na porta">
                     <span>Passei na porta</span>
                 </div>
-                <input type="hidden" name="origem" id="origem" required>
+                <input type="hidden" name="origem" id="origem">
             </div>
             <div class="form-group">
                 <label>Qual consultora te atendeu?</label>
-                <div class="option-item" onclick="setVendedora('Jéssica')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
                     <img src="jessica.jpg" alt="Jéssica">
                     <span>Jéssica</span>
                 </div>
-                <div class="option-item" onclick="setVendedora('Maju')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Maju')">
                     <img src="maju.jpg" alt="Maju">
                     <span>Maju</span>
                 </div>
-                <div class="option-item" onclick="setVendedora('Micaelly')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Micaelly')">
                     <img src="micaelly.jpg" alt="Micaelly">
                     <span>Micaelly</span>
                 </div>
-                <div class="option-item" onclick="setVendedora('Júlia')">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Júlia')">
                     <img src="julia.jpg" alt="Júlia">
                     <span>Júlia</span>
                 </div>
-                <input type="hidden" name="consultora" id="consultora" required>
+                <input type="hidden" name="consultora" id="consultora">
             </div>
             <div class="form-group">
                 <label>Nota do Atendimento</label>
                 <div class="rating">
-                    <span onclick="setRating(1)">1</span>
-                    <span onclick="setRating(2)">2</span>
-                    <span onclick="setRating(3)">3</span>
-                    <span onclick="setRating(4)">4</span>
-                    <span onclick="setRating(5)">5</span>
+                    <div class="star" onclick="selectOption(this, 'rating', 1)">1</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 2)">2</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 3)">3</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 4)">4</div>
+                    <div class="star" onclick="selectOption(this, 'rating', 5)">5</div>
                 </div>
-                <input type="hidden" name="rating" id="rating" required>
+                <input type="hidden" name="rating" id="rating">
             </div>
             <div class="form-group">
                 <label>Críticas ou sugestões</label>
                 <textarea name="sugestoes" maxlength="200"></textarea>
             </div>
-            <button type="submit">Enviar</button>
+            <button type="button" onclick="submitForm()">Enviar</button>
         </div>
     </div>
     <script>
-        function setOrigem(origem) {
-            document.getElementById('origem').value = origem;
-            alert(`Origem selecionada: ${origem}`);
+        function selectOption(element, fieldId, value) {
+            // Remove seleção anterior
+            const options = document.querySelectorAll(`.option-item, .star`);
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            // Adicionar seleção
+            element.classList.add('selected');
+            document.getElementById(fieldId).value = value;
         }
-        function setVendedora(nome) {
-            document.getElementById('consultora').value = nome;
-            alert(`Vendedora selecionada: ${nome}`);
-        }
-        function setRating(rating) {
-            document.getElementById('rating').value = rating;
-            alert(`Avaliação selecionada: ${rating}`);
+
+        function submitForm() {
+            alert('Avaliação enviada com sucesso!');
         }
     </script>
 </body>
