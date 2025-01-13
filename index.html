@@ -203,17 +203,43 @@
     </div>
     <script>
         function selectOption(element, fieldId, value, groupClass) {
-            // Limpar seleção anterior do grupo
             const options = document.querySelectorAll(`.${groupClass}`);
             options.forEach(opt => opt.classList.remove('selected'));
-
-            // Adicionar seleção ao elemento clicado
             element.classList.add('selected');
             document.getElementById(fieldId).value = value;
         }
 
         function submitForm() {
-            alert('Avaliação enviada com sucesso!');
+            const consultora = document.getElementById("consultora").value;
+            const origem = document.getElementById("origem").value;
+            const rating = document.getElementById("rating").value;
+            const sugestoes = document.querySelector("textarea[name='sugestoes']").value;
+
+            if (!consultora || !origem || !rating) {
+                alert("Por favor, preencha todos os campos obrigatórios antes de enviar.");
+                return;
+            }
+
+            const data = { consultora, origem, rating, sugestoes };
+
+            fetch("https://formulario-avaliacao-default-rtdb.firebaseio.com/respostas.json", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert("Avaliação enviada com sucesso!");
+                        document.querySelectorAll("input").forEach(input => input.value = "");
+                        document.querySelector("textarea").value = "";
+                    } else {
+                        alert("Erro ao enviar a avaliação. Tente novamente.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erro:", error);
+                    alert("Erro ao enviar a avaliação. Tente novamente.");
+                });
         }
     </script>
 </body>
