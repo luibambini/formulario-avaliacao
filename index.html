@@ -6,240 +6,195 @@
     <title>Avaliação</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #fce4ec; /* Cor clara da paleta da marca */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #FFFAF0;
             height: 100vh;
         }
+
         .container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            background: #fff;
+            width: 90%;
+            max-width: 900px;
+            background: #ffffff;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            width: 95%;
-            max-width: 1200px;
+            text-align: center;
         }
-        .video {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 100%;
-            margin-right: 20px;
+
+        h1, h2 {
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #b71c1c; /* Cor da marca */
         }
-        .video video {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 15px;
+
+        .section {
+            margin-bottom: 30px;
         }
-        .form-section {
-            display: grid;
-            grid-template-rows: auto auto auto auto;
-            gap: 20px;
-        }
-        .form-group {
+
+        .options {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            text-align: center;
-            gap: 10px;
+            gap: 15px;
+            justify-items: center;
         }
-        .form-group label {
-            grid-column: 1 / -1;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-            font-size: 20px;
-        }
+
         .option-item {
-            text-align: center;
             cursor: pointer;
-            opacity: 1;
-            transition: opacity 0.3s ease;
+            transition: transform 0.3s;
         }
-        .option-item.selected {
-            opacity: 0.5;
-        }
+
         .option-item img {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             border: 3px solid transparent;
-            transition: border 0.3s ease;
         }
-        .option-item span {
-            display: block;
-            margin-top: 5px;
-            font-size: 14px;
+
+        .option-item.selected img {
+            border-color: #f06292; /* Cor de destaque */
         }
-        textarea {
-            grid-column: 1 / -1;
-            resize: none;
-            height: 60px;
-            max-length: 200;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 100%;
+
+        .option-item p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            color: #424242;
         }
-        .rating {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .rating .star {
-            font-size: 24px;
-            cursor: pointer;
-            background-color: gold;
-            color: white;
-            padding: 15px;
-            border-radius: 50%;
+
+        .rating img {
             width: 50px;
             height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            cursor: pointer;
             transition: transform 0.3s ease;
         }
-        .rating .star:hover {
+
+        .rating img.selected {
             transform: scale(1.2);
-            background-color: #f39c12;
         }
+
+        textarea {
+            width: 100%;
+            height: 60px;
+            max-length: 200;
+            resize: none;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
         button {
-            grid-column: 1 / -1;
-            background-color: #FF6F61;
+            background-color: #d32f2f;
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
+
         button:hover {
-            background-color: #FF3B2F;
+            background-color: #c62828;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="video">
-            <video autoplay loop muted>
-                <source src="video_mascote.mp4" type="video/mp4">
-                Seu navegador não suporta vídeos.
-            </video>
-        </div>
-        <div class="form-section">
-            <div class="form-group">
-                <label>Por onde nos conheceu?</label>
-                <div class="option-item origem-group" onclick="selectOption(this, 'origem', 'Google', 'origem-group')">
+        <h1>Avaliação</h1>
+
+        <!-- Por onde nos conheceu -->
+        <div class="section">
+            <h2>Por onde nos conheceu?</h2>
+            <div class="options" id="origem-group">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Google')">
                     <img src="google.jpg" alt="Google">
-                    <span>Google</span>
+                    <p>Google</p>
                 </div>
-                <div class="option-item origem-group" onclick="selectOption(this, 'origem', 'Instagram', 'origem-group')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Instagram')">
                     <img src="instagram.jpg" alt="Instagram">
-                    <span>Instagram</span>
+                    <p>Instagram</p>
                 </div>
-                <div class="option-item origem-group" onclick="selectOption(this, 'origem', 'Facebook', 'origem-group')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Facebook')">
                     <img src="facebook.jpg" alt="Facebook">
-                    <span>Facebook</span>
+                    <p>Facebook</p>
                 </div>
-                <div class="option-item origem-group" onclick="selectOption(this, 'origem', 'Indicação', 'origem-group')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Indicação')">
                     <img src="indicacao.jpg" alt="Indicação">
-                    <span>Indicação</span>
+                    <p>Indicação</p>
                 </div>
-                <div class="option-item origem-group" onclick="selectOption(this, 'origem', 'WhatsApp', 'origem-group')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'WhatsApp')">
                     <img src="whatsapp.jpg" alt="WhatsApp">
-                    <span>WhatsApp</span>
+                    <p>WhatsApp</p>
                 </div>
-                <div class="option-item origem-group" onclick="selectOption(this, 'origem', 'Passei na porta', 'origem-group')">
+                <div class="option-item" onclick="selectOption(this, 'origem', 'Passei na porta')">
                     <img src="passei.jpg" alt="Passei na porta">
-                    <span>Passei na porta</span>
+                    <p>Passei na porta</p>
                 </div>
-                <input type="hidden" name="origem" id="origem">
             </div>
-            <div class="form-group">
-                <label>Qual consultora te atendeu?</label>
-                <div class="option-item consultora-group" onclick="selectOption(this, 'consultora', 'Jéssica', 'consultora-group')">
-                    <img src="jessica.jpg" alt="Jéssica">
-                    <span>Jéssica</span>
-                </div>
-                <div class="option-item consultora-group" onclick="selectOption(this, 'consultora', 'Maju', 'consultora-group')">
-                    <img src="maju.jpg" alt="Maju">
-                    <span>Maju</span>
-                </div>
-                <div class="option-item consultora-group" onclick="selectOption(this, 'consultora', 'Micaelly', 'consultora-group')">
-                    <img src="micaelly.jpg" alt="Micaelly">
-                    <span>Micaelly</span>
-                </div>
-                <div class="option-item consultora-group" onclick="selectOption(this, 'consultora', 'Júlia', 'consultora-group')">
-                    <img src="julia.jpg" alt="Júlia">
-                    <span>Júlia</span>
-                </div>
-                <input type="hidden" name="consultora" id="consultora">
-            </div>
-            <div class="form-group">
-                <label>Nota do Atendimento</label>
-                <div class="rating">
-                    <div class="star rating-group" onclick="selectOption(this, 'rating', 1, 'rating-group')">1</div>
-                    <div class="star rating-group" onclick="selectOption(this, 'rating', 2, 'rating-group')">2</div>
-                    <div class="star rating-group" onclick="selectOption(this, 'rating', 3, 'rating-group')">3</div>
-                    <div class="star rating-group" onclick="selectOption(this, 'rating', 4, 'rating-group')">4</div>
-                    <div class="star rating-group" onclick="selectOption(this, 'rating', 5, 'rating-group')">5</div>
-                </div>
-                <input type="hidden" name="rating" id="rating">
-            </div>
-            <div class="form-group">
-                <label>Críticas ou sugestões</label>
-                <textarea name="sugestoes" maxlength="200"></textarea>
-            </div>
-            <button type="button" onclick="submitForm()">Enviar</button>
         </div>
+
+        <!-- Qual consultora te atendeu -->
+        <div class="section">
+            <h2>Qual consultora te atendeu?</h2>
+            <div class="options" id="consultora-group">
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
+                    <img src="jessica.jpg" alt="Jéssica">
+                    <p>Jéssica</p>
+                </div>
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Maju')">
+                    <img src="maju.jpg" alt="Maju">
+                    <p>Maju</p>
+                </div>
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Micaelly')">
+                    <img src="micaelly.jpg" alt="Micaelly">
+                    <p>Micaelly</p>
+                </div>
+                <div class="option-item" onclick="selectOption(this, 'consultora', 'Júlia')">
+                    <img src="julia.jpg" alt="Júlia">
+                    <p>Júlia</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nota do Atendimento -->
+        <div class="section">
+            <h2>Nota do Atendimento</h2>
+            <div class="rating" id="rating-group">
+                <img src="1.jpg" alt="1" onclick="selectOption(this, 'rating', '1')">
+                <img src="2.jpg" alt="2" onclick="selectOption(this, 'rating', '2')">
+                <img src="3.jpg" alt="3" onclick="selectOption(this, 'rating', '3')">
+                <img src="4.jpg" alt="4" onclick="selectOption(this, 'rating', '4')">
+                <img src="5.jpg" alt="5" onclick="selectOption(this, 'rating', '5')">
+            </div>
+        </div>
+
+        <!-- Críticas ou sugestões -->
+        <div class="section">
+            <h2>Críticas ou sugestões</h2>
+            <textarea name="sugestoes" maxlength="200"></textarea>
+        </div>
+
+        <!-- Botão Enviar -->
+        <button onclick="submitForm()">Enviar</button>
     </div>
+
     <script>
-        function selectOption(element, fieldId, value, groupClass) {
-            const options = document.querySelectorAll(`.${groupClass}`);
-            options.forEach(opt => opt.classList.remove('selected'));
+        function selectOption(element, fieldId, value) {
+            const group = document.getElementById(`${fieldId}-group`);
+            group.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             document.getElementById(fieldId).value = value;
         }
 
         function submitForm() {
-            const consultora = document.getElementById("consultora").value;
-            const origem = document.getElementById("origem").value;
-            const rating = document.getElementById("rating").value;
-            const sugestoes = document.querySelector("textarea[name='sugestoes']").value;
-
-            if (!consultora || !origem || !rating) {
-                alert("Por favor, preencha todos os campos obrigatórios antes de enviar.");
-                return;
-            }
-
-            const data = { consultora, origem, rating, sugestoes };
-
-            fetch("https://formulario-avaliacao-default-rtdb.firebaseio.com/respostas.json", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        alert("Avaliação enviada com sucesso!");
-                        document.querySelectorAll("input").forEach(input => input.value = "");
-                        document.querySelector("textarea").value = "";
-                    } else {
-                        alert("Erro ao enviar a avaliação. Tente novamente.");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Erro:", error);
-                    alert("Erro ao enviar a avaliação. Tente novamente.");
-                });
+            alert('Avaliação enviada! Retornando à página principal...');
+            setTimeout(() => {
+                window.location.reload(); // Simula voltar à página principal
+            }, 2000);
         }
     </script>
 </body>
