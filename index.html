@@ -7,62 +7,68 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #fce4ec; /* Cor clara da marca */
+            background-color: #fce4ec; /* Cor da marca */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         .container {
             width: 90%;
-            max-width: 1024px; /* Dimensões do iPad horizontal */
+            max-width: 1024px; /* Dimensão ideal para iPads */
             background: #ffffff;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
             gap: 20px;
         }
 
         .video {
-            width: 30%;
-            min-width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .video video {
             width: 100%;
+            max-width: 300px;
+            height: auto;
             border-radius: 15px;
         }
 
         .form-section {
-            width: 65%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         h1, h2 {
             font-family: 'Georgia', serif;
-            font-size: 2vw; /* Fonte adaptativa */
-            margin-bottom: 20px;
+            font-size: 2rem;
             color: #b71c1c; /* Cor da marca */
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .options {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
             gap: 15px;
             justify-items: center;
         }
 
         .option-item {
             cursor: pointer;
+            text-align: center;
             transition: transform 0.3s;
         }
 
@@ -78,8 +84,8 @@
         }
 
         .option-item p {
-            margin: 10px 0 0;
-            font-size: 1vw; /* Texto adaptativo */
+            margin-top: 5px;
+            font-size: 0.9rem;
             color: #424242;
         }
 
@@ -87,7 +93,7 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
 
         .rating img.selected {
@@ -105,6 +111,7 @@
         }
 
         button {
+            width: 100%;
             background-color: #d32f2f;
             color: white;
             border: none;
@@ -112,25 +119,22 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 1rem;
         }
 
         button:hover {
             background-color: #c62828;
         }
 
-        /* Ajuste para telas menores (responsivo) */
+        /* Ajuste responsivo para telas menores */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .video, .form-section {
-                width: 100%;
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
 
             h1, h2 {
-                font-size: 5vw;
+                font-size: 1.5rem;
             }
 
             .option-item img {
