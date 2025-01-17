@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5;
+            background-color: #fef6e4; /* Paleta da sua marca */
             margin: 0;
             padding: 0;
             display: flex;
@@ -32,7 +32,7 @@
 
         .header h1 {
             font-size: 2.5rem;
-            color: #ff9800;
+            color: #ff6f61; /* Paleta da sua marca */
             text-transform: uppercase;
             margin: 0;
         }
@@ -52,6 +52,7 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             text-align: center;
+            color: #ff6f61; /* Paleta da sua marca */
         }
 
         .options {
@@ -74,14 +75,8 @@
 
         .option-item img {
             width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            transition: border 0.3s ease;
-        }
-
-        .option-item.selected img {
-            border-color: #ff9800;
+            height: auto; /* Remove o formato redondo */
+            border: none;
         }
 
         .option-item p {
@@ -90,9 +85,16 @@
             color: #424242;
         }
 
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
         .rating img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -120,7 +122,7 @@
 
         textarea:focus {
             outline: none;
-            border-color: #ff9800;
+            border-color: #ff6f61; /* Paleta da sua marca */
         }
 
         button {
@@ -128,7 +130,7 @@
             width: 100%;
             max-width: 300px;
             margin: 20px auto 0;
-            background-color: #ff9800;
+            background-color: #ff6f61; /* Paleta da sua marca */
             color: white;
             border: none;
             padding: 12px 20px;
@@ -139,7 +141,7 @@
         }
 
         button:hover {
-            background-color: #e68a00;
+            background-color: #e55b50; /* Paleta da sua marca */
             transform: translateY(-3px);
         }
 
@@ -161,8 +163,8 @@
             }
 
             .rating img {
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
@@ -176,7 +178,7 @@
 
         <div class="form-section">
             <!-- Por onde nos conheceu -->
-            <h2>Por onde nos conheceu?</h2>
+            <h2>POR ONDE NOS CONHECEU?</h2>
             <div class="options" id="origem-group">
                 <div class="option-item" onclick="selectOption(this, 'origem', 'Google')">
                     <img src="google.jpg" alt="Google">
@@ -205,7 +207,7 @@
             </div>
 
             <!-- Qual consultora te atendeu -->
-            <h2>Qual consultora te atendeu?</h2>
+            <h2>QUAL CONSULTORA TE ATENDEU?</h2>
             <div class="options" id="consultora-group">
                 <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
                     <img src="jessica.jpg" alt="Jéssica">
@@ -226,7 +228,7 @@
             </div>
 
             <!-- Nota do Atendimento -->
-            <h2>Nota do Atendimento</h2>
+            <h2>NOTA DO ATENDIMENTO</h2>
             <div class="rating" id="rating-group">
                 <img src="um.jpg" alt="1" onclick="selectOption(this, 'rating', '1')">
                 <img src="dois.jpg" alt="2" onclick="selectOption(this, 'rating', '2')">
@@ -236,7 +238,7 @@
             </div>
 
             <!-- Críticas ou sugestões -->
-            <h2>Críticas ou sugestões</h2>
+            <h2>CRÍTICAS OU SUGESTÕES</h2>
             <textarea name="sugestoes" maxlength="200" placeholder="Escreva aqui..."></textarea>
 
             <!-- Botão Enviar -->
@@ -252,9 +254,7 @@
         function selectOption(element, fieldId, value) {
             const group = document.getElementById(`${fieldId}-group`);
             group.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-            element.classList
-
-.add('selected');
+            element.classList.add('selected');
             document.getElementById(fieldId).value = value;
         }
 
