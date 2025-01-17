@@ -7,22 +7,24 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #fef6e4; /* Paleta da sua marca */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            background: linear-gradient(120deg, rgba(255, 214, 193, 0.9), rgba(255, 240, 221, 0.9));
+            height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
-            width: 90%;
-            max-width: 1100px;
-            background: #ffffff;
-            padding: 30px;
+            width: 95%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .header {
@@ -38,12 +40,6 @@
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        .header p {
-            font-size: 1rem;
-            color: #757575;
-            margin-top: 10px;
-        }
-
         .form-section {
             margin-top: 30px;
         }
@@ -53,35 +49,45 @@
             color: #ff6f61; /* Paleta da sua marca */
             text-transform: uppercase;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
         }
 
         .options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* Três ícones por linha */
             gap: 25px;
             justify-items: center;
             margin-bottom: 40px;
         }
 
-        .option-item {
-            cursor: pointer;
+        .consultoras {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Quatro consultoras por linha */
+            gap: 15px;
+            justify-items: center;
+            margin-bottom: 40px;
+        }
+
+        .option-item, .consultora-item {
             text-align: center;
+            cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .option-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .option-item img {
+        .option-item img, .consultora-item img {
             width: 100px;
             height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .option-item p {
+        .option-item:hover img, .consultora-item:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-item p, .consultora-item p {
             margin-top: 10px;
             font-size: 1rem;
             color: #424242;
@@ -148,20 +154,9 @@
             transform: translateY(-3px);
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: #757575;
-        }
-
         /* Responsivo */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .options {
+            .options, .consultoras {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -176,7 +171,6 @@
     <div class="container">
         <div class="header">
             <h1>Avaliação</h1>
-            <p>Sua opinião é muito importante para nós!</p>
         </div>
 
         <div class="form-section">
@@ -211,20 +205,20 @@
 
             <!-- Qual consultora te atendeu -->
             <h2>QUAL CONSULTORA TE ATENDEU?</h2>
-            <div class="options" id="consultora-group">
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
+            <div class="consultoras" id="consultora-group">
+                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
                     <img src="jessica.jpg" alt="Jéssica">
                     <p>Jéssica</p>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Maju')">
+                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Maju')">
                     <img src="maju.jpg" alt="Maju">
                     <p>Maju</p>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Micaelly')">
+                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Micaelly')">
                     <img src="micaelly.jpg" alt="Micaelly">
                     <p>Micaelly</p>
                 </div>
-                <div class="option-item" onclick="selectOption(this, 'consultora', 'Júlia')">
+                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Júlia')">
                     <img src="julia.jpg" alt="Júlia">
                     <p>Júlia</p>
                 </div>
