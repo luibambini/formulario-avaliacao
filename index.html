@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação</title>
     <style>
+        /* Configurações globais */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             background: linear-gradient(120deg, rgba(255, 214, 193, 0.9), rgba(255, 240, 221, 0.9));
-            height: 100vh;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
@@ -25,6 +26,7 @@
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
+            margin-top: 20px;
         }
 
         .header {
@@ -254,7 +256,7 @@
         function submitForm() {
             setTimeout(() => {
                 alert('Avaliação enviada com sucesso! Redirecionando...');
-                window.location.reload();
+                window.scrollTo(0, 0);
             }, 1000);
         }
     </script>
