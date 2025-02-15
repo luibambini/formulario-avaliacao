@@ -16,107 +16,73 @@
             height: 100vh;
         }
         .container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             background: #fff;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             width: 95%;
             max-width: 1200px;
-        }
-        .video {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 100%;
-            margin-right: 20px;
-        }
-        .video video {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 15px;
-        }
-        .form-section {
-            display: grid;
-            grid-template-rows: auto auto auto auto;
-            gap: 20px;
-        }
-        .form-group {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
             text-align: center;
-            gap: 15px;
         }
-        .form-group-consultoras {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 3px;
-            width: 100%;
-            flex-wrap: nowrap;
-        }
-        .form-group label {
-            grid-column: 1 / -1;
+        h2 {
             font-weight: bold;
             font-size: 24px;
             color: #e65100;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
-        .option-item img {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            border: 3px solid transparent;
-            transition: transform 0.3s ease;
+        .form-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
         }
-        .option-item img:hover {
+        .option-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .option-item.selected img {
             transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         .option-item span {
             display: block;
-            margin-top: 5px;
-            font-size: 16px;
             font-weight: bold;
+            margin-top: 5px;
         }
-        .consultora-item img {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 150px;
-            border-radius: 10px;
-        }
-        .rating {
-            grid-column: 1 / -1;
+        .consultoras {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
+            width: 100%;
         }
-        .rating img {
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
+        .consultoras .option-item img {
+            max-width: 150px;
+            height: auto;
         }
         textarea {
-            grid-column: 1 / -1;
-            resize: none;
-            height: 60px;
-            max-length: 200;
+            width: 100%;
+            height: 80px;
             border-radius: 5px;
             border: 1px solid #ccc;
             padding: 10px;
-            width: 100%;
+            resize: none;
         }
         button {
-            grid-column: 1 / -1;
             background-color: #d84315;
             color: white;
-            border: none;
             padding: 10px 20px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
+            margin-top: 20px;
         }
         button:hover {
             background-color: #bf360c;
@@ -125,47 +91,43 @@
 </head>
 <body>
     <div class="container">
-        <div class="video">
-            <video autoplay loop muted>
-                <source src="video_mascote.mp4" type="video/mp4">
-                Seu navegador não suporta vídeos.
-            </video>
+        <h2>POR ONDE NOS CONHECEU?</h2>
+        <div class="form-group" id="origem-group">
+            <div class="option-item" onclick="selectOption('origem', this)"><img src="instagram.jpg" alt="Instagram"><span>Instagram</span></div>
+            <div class="option-item" onclick="selectOption('origem', this)"><img src="google.jpg" alt="Google"><span>Google</span></div>
+            <div class="option-item" onclick="selectOption('origem', this)"><img src="facebook.jpg" alt="Facebook"><span>Facebook</span></div>
+            <div class="option-item" onclick="selectOption('origem', this)"><img src="indicacao.jpg" alt="Indicação"><span>Indicação</span></div>
+            <div class="option-item" onclick="selectOption('origem', this)"><img src="whatsapp.jpg" alt="WhatsApp"><span>WhatsApp</span></div>
+            <div class="option-item" onclick="selectOption('origem', this)"><img src="passei.jpg" alt="Passei na porta"><span>Passei na porta</span></div>
         </div>
-        <div class="form-section">
-            <div class="form-group">
-                <label>POR ONDE NOS CONHECEU?</label>
-                <div class="option-item"><img src="instagram.jpg" alt="Instagram"><span>Instagram</span></div>
-                <div class="option-item"><img src="google.jpg" alt="Google"><span>Google</span></div>
-                <div class="option-item"><img src="facebook.jpg" alt="Facebook"><span>Facebook</span></div>
-                <div class="option-item"><img src="indicacao.jpg" alt="Indicação"><span>Indicação</span></div>
-                <div class="option-item"><img src="whatsapp.jpg" alt="WhatsApp"><span>WhatsApp</span></div>
-                <div class="option-item"><img src="passei.jpg" alt="Passei na porta"><span>Passei na porta</span></div>
-            </div>
-            <div class="form-group">
-                <label>QUAL CONSULTORA TE ATENDEU?</label>
-                <div class="form-group-consultoras">
-                    <div class="consultora-item"><img src="jessica.jpg" alt="Jéssica"><span>Jéssica</span></div>
-                    <div class="consultora-item"><img src="maju.jpg" alt="Maju"><span>Maju</span></div>
-                    <div class="consultora-item"><img src="micaelly.jpg" alt="Micaelly"><span>Micaelly</span></div>
-                    <div class="consultora-item"><img src="julia.jpg" alt="Júlia"><span>Júlia</span></div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>NOTA DO ATENDIMENTO</label>
-                <div class="rating">
-                    <img src="um.jpg" alt="1">
-                    <img src="dois.jpg" alt="2">
-                    <img src="tres.jpg" alt="3">
-                    <img src="quatro.jpg" alt="4">
-                    <img src="cinco.jpg" alt="5">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>CRÍTICAS OU SUGESTÕES</label>
-                <textarea maxlength="200"></textarea>
-            </div>
-            <button>Enviar</button>
+        <h2>QUAL CONSULTORA TE ATENDEU?</h2>
+        <div class="consultoras" id="consultora-group">
+            <div class="option-item" onclick="selectOption('consultora', this)"><img src="jessica.jpg" alt="Jéssica"><span>Jéssica</span></div>
+            <div class="option-item" onclick="selectOption('consultora', this)"><img src="maju.jpg" alt="Maju"><span>Maju</span></div>
+            <div class="option-item" onclick="selectOption('consultora', this)"><img src="micaelly.jpg" alt="Micaelly"><span>Micaelly</span></div>
+            <div class="option-item" onclick="selectOption('consultora', this)"><img src="julia.jpg" alt="Júlia"><span>Júlia</span></div>
         </div>
+        <h2>NOTA DO ATENDIMENTO</h2>
+        <div class="form-group" id="nota-group">
+            <div class="option-item" onclick="selectOption('nota', this)"><img src="um.jpg" alt="1"></div>
+            <div class="option-item" onclick="selectOption('nota', this)"><img src="dois.jpg" alt="2"></div>
+            <div class="option-item" onclick="selectOption('nota', this)"><img src="tres.jpg" alt="3"></div>
+            <div class="option-item" onclick="selectOption('nota', this)"><img src="quatro.jpg" alt="4"></div>
+            <div class="option-item" onclick="selectOption('nota', this)"><img src="cinco.jpg" alt="5"></div>
+        </div>
+        <h2>CRÍTICAS OU SUGESTÕES</h2>
+        <textarea maxlength="200"></textarea>
+        <button onclick="submitForm()">Enviar</button>
     </div>
+    <script>
+        function selectOption(group, element) {
+            document.querySelectorAll(`#${group}-group .option-item`).forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        function submitForm() {
+            document.body.innerHTML = "<h1 style='text-align:center; color:green;'>Avaliação enviada com sucesso!</h1>";
+            setTimeout(() => { location.reload(); }, 5000);
+        }
+    </script>
 </body>
 </html>
