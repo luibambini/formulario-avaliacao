@@ -37,8 +37,8 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         .option-item img {
             width: 100px;
@@ -96,7 +96,7 @@
             align-items: center;
             width: 100%;
             gap: 20px;
-            margin-top: 10px;
+            margin-top: 20px;
         }
         button {
             background-color: #d84315;
@@ -111,11 +111,16 @@
         button:hover {
             background-color: #bf360c;
         }
+        video {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>POR ONDE NOS CONHECEU?</h2>
+        <video id="video" autoplay></video>
+        <canvas id="canvas" style="display:none;"></canvas>
         <div class="form-group origem-group" id="origem-group">
             <div class="option-item" onclick="selectOption('origem', this)"><img src="instagram.jpg" alt="Instagram"><span>Instagram</span></div>
             <div class="option-item" onclick="selectOption('origem', this)"><img src="google.jpg" alt="Google"><span>Google</span></div>
@@ -124,25 +129,10 @@
             <div class="option-item" onclick="selectOption('origem', this)"><img src="whatsapp.jpg" alt="WhatsApp"><span>WhatsApp</span></div>
             <div class="option-item" onclick="selectOption('origem', this)"><img src="passei.jpg" alt="Passei na porta"><span>Passei na porta</span></div>
         </div>
-        <h2>QUAL CONSULTORA TE ATENDEU?</h2>
-        <div class="consultoras" id="consultora-group">
-            <div class="option-item" onclick="selectOption('consultora', this)"><img src="jessica.jpg" alt="Jéssica"><span>Jéssica</span></div>
-            <div class="option-item" onclick="selectOption('consultora', this)"><img src="maju.jpg" alt="Maju"><span>Maju</span></div>
-            <div class="option-item" onclick="selectOption('consultora', this)"><img src="micaelly.jpg" alt="Micaelly"><span>Micaelly</span></div>
-            <div class="option-item" onclick="selectOption('consultora', this)"><img src="julia.jpg" alt="Júlia"><span>Júlia</span></div>
-        </div>
-        <h2>NOTA DO ATENDIMENTO</h2>
-        <div class="form-group" id="nota-group">
-            <div class="option-item" onclick="selectOption('nota', this)"><img src="um.jpg" alt="1"></div>
-            <div class="option-item" onclick="selectOption('nota', this)"><img src="dois.jpg" alt="2"></div>
-            <div class="option-item" onclick="selectOption('nota', this)"><img src="tres.jpg" alt="3"></div>
-            <div class="option-item" onclick="selectOption('nota', this)"><img src="quatro.jpg" alt="4"></div>
-            <div class="option-item" onclick="selectOption('nota', this)"><img src="cinco.jpg" alt="5"></div>
-        </div>
         <h2>CRÍTICAS OU SUGESTÕES</h2>
         <div class="form-footer">
             <textarea maxlength="200"></textarea>
-            <button onclick="submitForm()">Enviar</button>
+            <button onclick="capturePhoto()">Enviar</button>
         </div>
     </div>
     <script>
@@ -150,7 +140,28 @@
             document.querySelectorAll(`#${group}-group .option-item`).forEach(item => item.classList.remove('selected'));
             element.classList.add('selected');
         }
-        function submitForm() {
+        
+        function capturePhoto() {
+            let video = document.getElementById('video');
+            let canvas = document.getElementById('canvas');
+            let context = canvas.getContext('2d');
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    setTimeout(() => {
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        let photo = canvas.toDataURL('image/png');
+                        console.log('Foto capturada:', photo);
+                        submitForm(photo);
+                    }, 2000);
+                })
+                .catch(function (err) {
+                    console.error("Erro ao acessar a câmera: ", err);
+                });
+        }
+        
+        function submitForm(photo) {
             document.body.innerHTML = "<h1 style='text-align:center; color:green;'>Avaliação enviada com sucesso!</h1>";
             setTimeout(() => { location.reload(); }, 5000);
         }
