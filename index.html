@@ -5,260 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação</title>
     <style>
-        /* Configurações globais */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            background: linear-gradient(120deg, rgba(255, 214, 193, 0.9), rgba(255, 240, 221, 0.9));
-            min-height: 100vh;
-            overflow-x: hidden;
+            align-items: center;
+            background: linear-gradient(to bottom, #ffcc80, #ffab40);
+            height: 100vh;
         }
-
         .container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             width: 95%;
             max-width: 1200px;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            margin-top: 20px;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            color: #ff6f61; /* Paleta da sua marca */
-            text-transform: uppercase;
-            margin: 0;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .form-section {
-            margin-top: 30px;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            color: #ff6f61; /* Paleta da sua marca */
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Três ícones por linha */
-            gap: 25px;
-            justify-items: center;
-            margin-bottom: 40px;
-        }
-
-        .consultoras {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Quatro consultoras por linha */
-            gap: 15px;
-            justify-items: center;
-            margin-bottom: 40px;
-        }
-
-        .option-item, .consultora-item {
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .option-item img, .consultora-item img {
-            width: 100px;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .option-item:hover img, .consultora-item:hover img {
-            transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .option-item p, .consultora-item p {
-            margin-top: 10px;
-            font-size: 1rem;
-            color: #424242;
-            font-weight: bold;
-        }
-
-        .rating {
+        .video {
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            max-width: 100%;
+            margin-right: 20px;
         }
-
-        .rating img {
-            width: 70px;
-            height: 70px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .rating img:hover {
-            transform: scale(1.1);
-        }
-
-        .rating img.selected {
-            transform: scale(1.2);
-            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.5);
-        }
-
-        textarea {
-            width: 100%;
-            height: 80px;
-            resize: none;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            margin-top: 20px;
-            font-size: 1rem;
-            color: #424242;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #ff6f61; /* Paleta da sua marca */
-        }
-
-        button {
-            display: block;
+        .video video {
             width: 100%;
             max-width: 300px;
-            margin: 40px auto 0;
-            background-color: #ff6f61; /* Paleta da sua marca */
+            height: auto;
+            border-radius: 15px;
+        }
+        .form-section {
+            display: grid;
+            grid-template-rows: auto auto auto auto;
+            gap: 20px;
+        }
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 15px;
+        }
+        .form-group-consultoras {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+        .form-group label {
+            grid-column: 1 / -1;
+            font-weight: bold;
+            font-size: 24px;
+            color: #e65100;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .option-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            border: 3px solid transparent;
+            transition: transform 0.3s ease;
+        }
+        .option-item img:hover {
+            transform: scale(1.1);
+        }
+        .option-item span {
+            display: block;
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .consultora-item img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .rating {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .rating img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        textarea {
+            grid-column: 1 / -1;
+            resize: none;
+            height: 60px;
+            max-length: 200;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+        }
+        button {
+            grid-column: 1 / -1;
+            background-color: #d84315;
             color: white;
             border: none;
-            padding: 15px 20px;
-            border-radius: 8px;
-            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease;
         }
-
         button:hover {
-            background-color: #e55b50; /* Paleta da sua marca */
-            transform: translateY(-3px);
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .options, .consultoras {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .rating img {
-                width: 50px;
-                height: 50px;
-            }
+            background-color: #bf360c;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Avaliação</h1>
+        <div class="video">
+            <video autoplay loop muted>
+                <source src="video_mascote.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
         </div>
-
         <div class="form-section">
-            <!-- Por onde nos conheceu -->
-            <h2>POR ONDE NOS CONHECEU?</h2>
-            <div class="options" id="origem-group">
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Google')">
-                    <img src="google.jpg" alt="Google">
-                    <p>Google</p>
-                </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Instagram')">
-                    <img src="instagram.jpg" alt="Instagram">
-                    <p>Instagram</p>
-                </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Facebook')">
-                    <img src="facebook.jpg" alt="Facebook">
-                    <p>Facebook</p>
-                </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Indicação')">
-                    <img src="indicacao.jpg" alt="Indicação">
-                    <p>Indicação</p>
-                </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'WhatsApp')">
-                    <img src="whatsapp.jpg" alt="WhatsApp">
-                    <p>WhatsApp</p>
-                </div>
-                <div class="option-item" onclick="selectOption(this, 'origem', 'Passei na porta')">
-                    <img src="passei.jpg" alt="Passei na porta">
-                    <p>Passei na porta</p>
+            <div class="form-group">
+                <label>POR ONDE NOS CONHECEU?</label>
+                <div class="option-item"><img src="instagram.jpg" alt="Instagram"><span>Instagram</span></div>
+                <div class="option-item"><img src="google.jpg" alt="Google"><span>Google</span></div>
+                <div class="option-item"><img src="facebook.jpg" alt="Facebook"><span>Facebook</span></div>
+                <div class="option-item"><img src="indicacao.jpg" alt="Indicação"><span>Indicação</span></div>
+                <div class="option-item"><img src="whatsapp.jpg" alt="WhatsApp"><span>WhatsApp</span></div>
+                <div class="option-item"><img src="passei.jpg" alt="Passei na porta"><span>Passei na porta</span></div>
+            </div>
+            <div class="form-group">
+                <label>QUAL CONSULTORA TE ATENDEU?</label>
+                <div class="form-group-consultoras">
+                    <div class="consultora-item"><img src="jessica.jpg" alt="Jéssica"><span>Jéssica</span></div>
+                    <div class="consultora-item"><img src="maju.jpg" alt="Maju"><span>Maju</span></div>
+                    <div class="consultora-item"><img src="micaelly.jpg" alt="Micaelly"><span>Micaelly</span></div>
+                    <div class="consultora-item"><img src="julia.jpg" alt="Júlia"><span>Júlia</span></div>
                 </div>
             </div>
-
-            <!-- Qual consultora te atendeu -->
-            <h2>QUAL CONSULTORA TE ATENDEU?</h2>
-            <div class="consultoras" id="consultora-group">
-                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Jéssica')">
-                    <img src="jessica.jpg" alt="Jéssica">
-                    <p>Jéssica</p>
-                </div>
-                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Maju')">
-                    <img src="maju.jpg" alt="Maju">
-                    <p>Maju</p>
-                </div>
-                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Micaelly')">
-                    <img src="micaelly.jpg" alt="Micaelly">
-                    <p>Micaelly</p>
-                </div>
-                <div class="consultora-item" onclick="selectOption(this, 'consultora', 'Júlia')">
-                    <img src="julia.jpg" alt="Júlia">
-                    <p>Júlia</p>
+            <div class="form-group">
+                <label>NOTA DO ATENDIMENTO</label>
+                <div class="rating">
+                    <img src="um.jpg" alt="1">
+                    <img src="dois.jpg" alt="2">
+                    <img src="tres.jpg" alt="3">
+                    <img src="quatro.jpg" alt="4">
+                    <img src="cinco.jpg" alt="5">
                 </div>
             </div>
-
-            <!-- Nota do Atendimento -->
-            <h2>NOTA DO ATENDIMENTO</h2>
-            <div class="rating" id="rating-group">
-                <img src="um.jpg" alt="1" onclick="selectOption(this, 'rating', '1')">
-                <img src="dois.jpg" alt="2" onclick="selectOption(this, 'rating', '2')">
-                <img src="tres.jpg" alt="3" onclick="selectOption(this, 'rating', '3')">
-                <img src="quatro.jpg" alt="4" onclick="selectOption(this, 'rating', '4')">
-                <img src="cinco.jpg" alt="5" onclick="selectOption(this, 'rating', '5')">
+            <div class="form-group">
+                <label>CRÍTICAS OU SUGESTÕES</label>
+                <textarea maxlength="200"></textarea>
             </div>
-
-            <!-- Críticas ou sugestões -->
-            <h2>CRÍTICAS OU SUGESTÕES</h2>
-            <textarea name="sugestoes" maxlength="200" placeholder="Escreva aqui..."></textarea>
-
-            <!-- Botão Enviar -->
-            <button onclick="submitForm()">Enviar</button>
+            <button>Enviar</button>
         </div>
     </div>
-
-    <script>
-        function selectOption(element, fieldId, value) {
-            const group = document.getElementById(`${fieldId}-group`);
-            group.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-            document.getElementById(fieldId).value = value;
-        }
-
-        function submitForm() {
-            setTimeout(() => {
-                alert('Avaliação enviada com sucesso! Redirecionando...');
-                window.scrollTo(0, 0);
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
