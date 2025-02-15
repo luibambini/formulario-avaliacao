@@ -55,13 +55,15 @@
             display: block;
             font-weight: bold;
             margin-top: 5px;
-            font-size: 16px;
             color: #333;
             text-transform: uppercase;
             background: linear-gradient(to right, #ff6f00, #ffcc80);
             padding: 5px;
             border-radius: 8px;
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .origem-group .option-item span {
+            font-size: 14px;
         }
         .consultoras {
             display: flex;
@@ -114,7 +116,7 @@
 <body>
     <div class="container">
         <h2>POR ONDE NOS CONHECEU?</h2>
-        <div class="form-group" id="origem-group">
+        <div class="form-group origem-group" id="origem-group">
             <div class="option-item" onclick="selectOption('origem', this)"><img src="instagram.jpg" alt="Instagram"><span>Instagram</span></div>
             <div class="option-item" onclick="selectOption('origem', this)"><img src="google.jpg" alt="Google"><span>Google</span></div>
             <div class="option-item" onclick="selectOption('origem', this)"><img src="facebook.jpg" alt="Facebook"><span>Facebook</span></div>
